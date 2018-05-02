@@ -1,7 +1,31 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
+14.times do |room|
+  Room.create(id: "#{room + 1}", name: "#{room + 1}")
+end
+
+Role.create(id: 1, name: "洗濯タオル類：１回")
+Role.create(id: 2, name: "ゴミ出し（燃えるゴミ）：水・土")
+Role.create(id: 3, name: "Free")
+Role.create(id: 4, name: "風呂脱衣所：１回")
+Role.create(id: 5, name: "洗濯タオル類：１回")
+Role.create(id: 6, name: "廊下・階段（全フロア）：１回")
+Role.create(id: 7, name: "ゴミ出し（その他のゴミ）：月・火・木")
+Role.create(id: 8, name: "トイレ（１・２・３F）：１回")
+Role.create(id: 9, name: "キッチン掃除：１回")
+Role.create(id: 10, name: "洗面所（１・２F）：１回")
+Role.create(id: 11, name: "会計")
+Role.create(id: 12, name: "空室")
+
+Tobanhyo.create(room_id: 1, role_id: 1)
+Tobanhyo.create(room_id: 2, role_id: 2)
+Tobanhyo.create(room_id: 3, role_id: 3)
+Tobanhyo.create(room_id: 4, role_id: 4)
+Tobanhyo.create(room_id: 5, role_id: 5)
+Tobanhyo.create(room_id: 6, role_id: 3)
+Tobanhyo.create(room_id: 7, role_id: 6)
+Tobanhyo.create(room_id: 8, role_id: 7)
+Tobanhyo.create(room_id: 9, role_id: 12, fixed: 1)
+Tobanhyo.create(room_id: 10, role_id: 3)
+Tobanhyo.create(room_id: 11, role_id: 8)
+Tobanhyo.create(room_id: 12, role_id: 11, fixed: 1)
+Tobanhyo.create(room_id: 13, role_id: 9)
+Tobanhyo.create(room_id: 14, role_id: 10)
