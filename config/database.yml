@@ -49,6 +49,6 @@ test:
 #
 production:
   <<: *default
-  database: to-ban-hyo_production
-  username: to-ban-hyo
-  password: <%= ENV['TO-BAN-HYO_DATABASE_PASSWORD'] %>
+  database: heroku_a098a69ede1a645
+  username: bb26d843d868f3
+  password: <%= ENV['DATABASE_PASSWORD'] %>
