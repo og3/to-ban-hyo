@@ -1,3 +1,4 @@
 Rails.application.routes.draw do
-  post '/webhook' => 'tobanhyos#send_line_msg'
+  # linedevで設定しているwebhookURLと同じにすると、グループユーザーのコメント等に反応してしまうため、URLを変更した
+  post '/webhook2' => 'tobanhyos#send_line_msg'
 end
