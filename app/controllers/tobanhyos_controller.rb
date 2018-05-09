@@ -14,7 +14,8 @@ class TobanhyosController < ApplicationController
   def create_line_msg
     tobanhyo = Tobanhyo.all
     msg = "今週の掃除当番です！\n"
-    msg << "[#{Time.now.strftime('%Y/%m/%d')} 〜 #{Time.now.since(7.days).strftime('%Y/%m/%d')}]\n"
+    msg << "[#{Time.now.strftime('%Y/%m/%d')} 〜 #{Time.now.since(7.days).strftime('%Y/%m/%d')}]\n\n"
+    msg << "掃除が完了したらこちらに完了した旨を投稿してください！\n\n"
     tobanhyo.each do |hyo|
       msg << "#{hyo.room.name}: #{hyo.role.name}\n"
     end
@@ -31,7 +32,7 @@ class TobanhyosController < ApplicationController
       config.channel_secret = ENV["LINE_CHANNEL_SECRET"]
       config.channel_token = ENV["LINE_ACCESS_TOKEN"]
     }
-    response = client.push_message("C0eecebeefc99fb949035edb04bc95023", message)
+    response = client.push_message(ENV["LINE_GROUP_ID"], message)
     p response
   end
 end
