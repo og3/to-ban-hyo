@@ -1,5 +1,6 @@
 class TobanhyosController < ApplicationController
   require 'line/bot'
+  require 'date'
   # apiからのアクセスがあるため以下のアクションを例外に設定
   protect_from_forgery except: [:send_tobanhyo, :send_remind_msg]
 
@@ -15,9 +16,8 @@ class TobanhyosController < ApplicationController
   def create_line_msg
     tobanhyo = Tobanhyo.where(fixed: 0)
     fixed = Tobanhyo.where(fixed: 1)
-    msg = "今週の掃除当番です！\n"
-    msg << "[#{Time.now.strftime('%Y/%m/%d')} 〜 #{Time.now.since(7.days).strftime('%Y/%m/%d')}]\n\n"
-    msg << "掃除が完了したらこちらに完了した旨を投稿してください！\n\n"
+    msg = "今週の掃除当番です！\n掃除が完了したらこちらに完了した旨を投稿してください！
+[#{Time.now.strftime('%Y/%m/%d')} 〜 #{Time.now.since(7.days).strftime('%Y/%m/%d')}]\n\n" if Date.today.sunday?
     tobanhyo.each do |hyo|
       msg << "#{hyo.room.name}: #{hyo.role.name}\n"
     end
@@ -40,7 +40,7 @@ class TobanhyosController < ApplicationController
   def send_remind_msg
     message = {
       type: 'text',
-      text: "今週の掃除は終わりましたか？\n終わっていたらその旨をお知らせください！"
+      text: "今週の掃除は終わりましたか？\n終わっていたらその旨をお知らせください！\n\n#{create_line_msg}"
     }
     send_line(message)
   end
