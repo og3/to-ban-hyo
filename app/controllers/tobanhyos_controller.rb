@@ -6,16 +6,9 @@ class TobanhyosController < ApplicationController
   def create_new_tobanhyo
     tobanhyo = Tobanhyo.where(start_of_period: Time.zone.today.ago(7.days))
     new_tobanhyo = tobanhyo.map(&:dup)
-    new_tobanhyo.each do |hyo|
-      hyo.start_of_period = Time.zone.today.strftime('%Y/%m/%d')
-      hyo.save!
-    end
-  end
-
-  def rotate
-    tobanhyo = Tobanhyo.where(start_of_period: Time.zone.today).where(fixed: 0)
     new_roles = tobanhyo.map(&:role_id).rotate
-    tobanhyo.zip(new_roles).each do |hyo, new_role_id|
+    new_tobanhyo.zip(new_roles).each do |hyo, new_role_id|
+      hyo.start_of_period = Time.zone.today.strftime('%Y/%m/%d')
       hyo.role_id = new_role_id
       hyo.save!
     end
@@ -40,19 +33,34 @@ class TobanhyosController < ApplicationController
     msg
   end
 
+  def create_remind_msg
+    duty, toban_id = case Time.zone.today.strftime("%a")
+                     when "Sun" then ["資源ごみ", 6]
+                     when "Tue" then ["プラスチック", 6]
+                     when "Wed" then ["燃えないゴミ", 6]
+                     when "Thu","Fri" then ["燃えるゴミ", 2]
+                     end
+    toban = Tobanhyo.where(role_id: toban_id).order(:start_of_period).last
+    msg = "明日は #{duty} の日です！\nよろしくお願いします！\n\n#{toban.room.name}: #{toban.role.name}"
+    msg
+  end
+
   def send_msg
-    if Time.zone.today.sunday?
-      create_new_tobanhyo
-      rotate
-    end
+    create_new_tobanhyo if Time.zone.today.sunday?
     message = {
       type: 'text',
       text: create_tobanhyo_msg
     }
     send_line(message)
   end
-
-  private
+  # 暫定対応
+  def send_remind_msg
+    message = {
+      type: 'text',
+      text: create_remind_msg
+    }
+    send_line(message)
+  end
 
   def send_line(message)
     client = Line::Bot::Client.new { |config|
