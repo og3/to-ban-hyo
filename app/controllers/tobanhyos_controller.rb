@@ -36,9 +36,9 @@ class TobanhyosController < ApplicationController
   def create_remind_msg
     duty, toban_id = case Time.zone.today.strftime("%a")
                      when "Sun" then ["資源ごみ", 6]
-                     when "Tue" then ["プラスチック", 6]
+                     when "Mon" then ["プラスチック", 6]
                      when "Wed" then ["燃えないゴミ", 6]
-                     when "Thu","Fri" then ["燃えるゴミ", 2]
+                     when "Tue","Fri" then ["燃えるゴミ", 2]
                      end
     toban = Tobanhyo.where(role_id: toban_id).order(:start_of_period).last
     msg = "明日は #{duty} の日です！\nよろしくお願いします！\n\n#{toban.room.name}: #{toban.role.name}"
