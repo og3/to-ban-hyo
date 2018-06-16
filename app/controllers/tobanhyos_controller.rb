@@ -4,12 +4,16 @@ class TobanhyosController < ApplicationController
   protect_from_forgery except: [:send_tobanhyo, :send_remind_msg]
 
   def create_new_tobanhyo
-    tobanhyo = Tobanhyo.where(start_of_period: Time.zone.today.ago(7.days))
-    new_tobanhyo = tobanhyo.map(&:dup)
-    new_roles = tobanhyo.map(&:role_id).rotate
-    new_tobanhyo.zip(new_roles).each do |hyo, new_role_id|
+    new_tobanhyo = Tobanhyo.where(start_of_period: Time.zone.today.ago(7.days)).map(&:dup)
+    new_tobanhyo_group = new_tobanhyo.group_by(&:fixed)
+    new_roles = new_tobanhyo_group[false].map(&:role_id).rotate
+    new_tobanhyo_group[false].zip(new_roles).each do |hyo, new_role_id|
       hyo.start_of_period = Time.zone.today.strftime('%Y/%m/%d')
       hyo.role_id = new_role_id
+      hyo.save!
+    end
+    new_tobanhyo_group[true].each do |hyo|
+      hyo.start_of_period = Time.zone.today.strftime('%Y/%m/%d')
       hyo.save!
     end
   end
