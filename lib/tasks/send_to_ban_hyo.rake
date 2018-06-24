@@ -22,8 +22,9 @@ namespace :send_to_ban_hyo do
 [#{Time.zone.today.strftime('%Y/%m/%d')} 〜 #{Time.zone.today.since(7.days).strftime('%Y/%m/%d')}]\n\n"
     saturday = "今週の掃除は終わりましたか？\n終わっていたらその旨をお知らせください！\n\n"
     msg = Time.zone.today.sunday? ? sunday : saturday
+    pic_tobanhyo = Time.zone.today.sunday? ? Time.zone.today : Time.zone.today.ago(6.days)
     # ここまで暫定対処
-    toban_list = Tobanhyo.where(start_of_period: Time.zone.today)
+    toban_list = Tobanhyo.where(start_of_period: pic_tobanhyo)
     toban_group = toban_list.group_by(&:fixed)
     toban_group[false].each do |hyo|
       msg << "#{hyo.room.name}: #{hyo.role.name}\n"
