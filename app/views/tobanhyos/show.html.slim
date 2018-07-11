@@ -1,0 +1,10 @@
+= params[:start_of_period]
+- @tobanhyo[false].each do |tobanhyo|
+  p
+    = tobanhyo.room.name + " : "
+    = tobanhyo.role.name
+= "---------------------"
+- @tobanhyo[true].each do |tobanhyo|
+  p
+    = tobanhyo.room.name + " : "
+    = tobanhyo.role.name
