@@ -1,0 +1,19 @@
+p = Time.zone.today.strftime('%Y/%m/%d')
+p = "更新は土曜の20:00~日曜の19:59に行なってください（暫定）"
+= form_tag '/tobanhyos', method: :post do
+  - @tobanhyos[false].each do |tobanhyo|
+    = fields_for "tobans[]", tobanhyo do |fi|
+      p
+        = fi.select :room_id, @rooms, :selected => tobanhyo.room.id
+        = fi.select :role_id, @roles, :selected => tobanhyo.role.id
+        = fi.select :fixed, [true, false], :selected => false
+        = fi.date_field :start_of_period, value: Time.zone.today.strftime("%Y-%m-%d")
+  = "---------------------"
+  - @tobanhyos[true].each do |tobanhyo|
+    = fields_for "tobans[]", tobanhyo do |fi|
+        p
+          = fi.select :room_id, @rooms, :selected => tobanhyo.room.id
+          = fi.select :role_id, @roles, :selected => tobanhyo.role.id
+          = fi.select :fixed, [true, false], :selected => true
+          = fi.date_field :start_of_period, value: Time.zone.today.strftime("%Y-%m-%d")
+  = submit_tag
