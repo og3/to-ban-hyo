@@ -1,4 +1,7 @@
 class TobanhyosController < ApplicationController
+
+  before_action :not_admin?
+
   def index
     @tobanhyos = Tobanhyo.all.group_by(&:start_of_period).keys
   end

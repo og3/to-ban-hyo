@@ -5,6 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'bcrypt'
 gem 'slim-rails'
 gem 'line-bot-api'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
@@ -46,6 +47,7 @@ group :development do
   gem 'byebug', platform: :mri
   gem 'rubocop', require: false
   gem 'pry-rails'
+  gem 'html2slim'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -1,0 +1,7 @@
+= form_for :session, url: login_path do |f|
+  p
+    = f.text_field :login_id
+  p
+    = f.password_field :password
+  p
+    = f.submit 'ログイン'

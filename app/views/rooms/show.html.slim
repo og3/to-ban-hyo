@@ -1,0 +1,8 @@
+P = "ログイン中：#{@current_room.name}"
+P = "今週の掃除当番（#{@toban.start_of_period}〜）：#{@toban.role.name}"
+p = "だいそんクンで「couri024」に投稿する"
+p = "だいそんクンで「掃除当番G」に投稿する"
+- if admin?
+  p = link_to "部屋一覧へ", rooms_path
+  p = link_to "当番表一覧へ", tobanhyos_path
+p = link_to "ログアウト", logout_path, :method => :delete
