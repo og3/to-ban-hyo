@@ -1,6 +1,4 @@
 class RoomsController < ApplicationController
-  # デバッグ用
-  # skip_before_action :require_sign_in!
   before_action :set_room, only: [:update, :edit]
   # 一覧と編集は管理者権限のみ
   before_action :not_admin?, only: [:update, :edit, :index]

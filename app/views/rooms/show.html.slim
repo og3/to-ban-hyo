@@ -9,27 +9,25 @@
       .panel.panel-info
         .panel-heading
           h3.panel-title
-            = @current_room.name
+            = "info and menu"
         .panel-body
           .row
             .col-md-9.col-lg-9
               table.table.table-user-information
                 tbody
                   tr
-                    td
-                      = "掃除当番（#{@toban.start_of_period.strftime('%m/%d')}〜）"
-                    td
-                      = @toban.role.name
-              .btn.btn-primary.center-block
-                = "「couri024」に投稿する"
+                    td = "ユーザー"
+                    td = @current_room.name
+                  tr
+                    td = "掃除当番（#{@toban.start_of_period.strftime('%m/%d')}〜）"
+                    td = @toban.role.name
+              = link_to "「couri024」に投稿する", anonymousposts_path(send_to: "couri024"), class: 'btn btn-primary center-block'
               .adsence
                 br
-              .btn.btn-primary.center-block
-                = "「掃除当番G」に投稿する"
+              = link_to "「掃除当番G」に投稿する", anonymousposts_path(send_to: "soujig"), class: 'btn btn-primary center-block'
               .adsence
                 br
-              .btn.btn-primary.center-block
-                = "「テストグループ」に投稿する"
+              = link_to "「テストグループ」に投稿する", anonymousposts_path(send_to: "test"), class: 'btn btn-primary center-block'
               - if admin?
                 ul
                   li = link_to "部屋一覧へ", rooms_path, class: 'btn btn-sm'
