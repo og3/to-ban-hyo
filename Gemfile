@@ -5,6 +5,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'bootstrap-sass'
 gem 'bcrypt'
 gem 'slim-rails'
 gem 'line-bot-api'

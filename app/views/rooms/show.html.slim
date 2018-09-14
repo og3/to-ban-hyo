@@ -1,8 +1,38 @@
-P = "ログイン中：#{@current_room.name}"
-P = "今週の掃除当番（#{@toban.start_of_period}〜）：#{@toban.role.name}"
-p = "だいそんクンで「couri024」に投稿する"
-p = "だいそんクンで「掃除当番G」に投稿する"
-- if admin?
-  p = link_to "部屋一覧へ", rooms_path
-  p = link_to "当番表一覧へ", tobanhyos_path
-p = link_to "ログアウト", logout_path, :method => :delete
+.page-header.text-center
+  h2
+    | menu
+.adsence.text-center
+  br
+.container
+  .row
+    .col-xs-12.col-sm-12.col-md-6.col-lg-6.col-xs-offset-0.col-sm-offset-0.col-md-offset-3.col-lg-offset-3.toppad
+      .panel.panel-info
+        .panel-heading
+          h3.panel-title
+            = @current_room.name
+        .panel-body
+          .row
+            .col-md-9.col-lg-9
+              table.table.table-user-information
+                tbody
+                  tr
+                    td
+                      = "掃除当番（#{@toban.start_of_period.strftime('%m/%d')}〜）"
+                    td
+                      = @toban.role.name
+              .btn.btn-primary.center-block
+                = "「couri024」に投稿する"
+              .adsence
+                br
+              .btn.btn-primary.center-block
+                = "「掃除当番G」に投稿する"
+              .adsence
+                br
+              .btn.btn-primary.center-block
+                = "「テストグループ」に投稿する"
+              - if admin?
+                ul
+                  li = link_to "部屋一覧へ", rooms_path, class: 'btn btn-sm'
+                  li = link_to "当番表一覧へ", tobanhyos_path, class: 'btn btn-sm'
+        .panel-footer
+          = link_to "ログアウト", logout_path, :method => :delete, class: 'btn btn-sm btn-danger center-block'

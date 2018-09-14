@@ -1,7 +1,21 @@
-= form_for :session, url: login_path do |f|
-  p
-    = f.text_field :login_id
-  p
-    = f.password_field :password
-  p
-    = f.submit 'ログイン'
+head
+  style
+    |  body, html { height: 100%; background-repeat: #eee; } .card { max-width: 350px; padding: 40px 40px; background-color: #F7F7F7; margin: 0 auto 25px; margin-top: 50px; -moz-border-radius: 2px; -webkit-border-radius: 2px; border-radius: 2px; -moz-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); -webkit-box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); box-shadow: 0px 2px 2px rgba(0, 0, 0, 0.3); } .profile-img{ width:40%; height:auto; margin:0 auto; display:block; } .mb10{margin:0 0 10px 0;} 
+body
+  .page-header.text-center
+    h1
+      | login
+  .adsence.text-center
+    br
+  .container
+    .card.card-container
+      p#profile-name.profile-name-card.text-center
+        = "pleas enter your id and password"
+      = form_for :session, html: {class: 'form-signin mb10'}, url: login_path do |f|
+        = f.text_field :login_id, class: 'form-control mb10', placeholder: "login_id"
+        = f.password_field :password, class: 'form-control', placeholder: "Password"
+        br
+        = f.submit "login", class: 'btn btn-lg btn-primary btn-block'
+  .text-center
+    script
+      |  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){ (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o), m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m) })(window,document,'script','//www.google-analytics.com/analytics.js','ga'); ga('create', 'UA-8521988-2', 'auto'); ga('send', 'pageview'); 
