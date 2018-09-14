@@ -1,0 +1,18 @@
+= form_for @room, url: room_path do |f|
+  p
+    = f.label :name
+    = f.text_field :name
+  p
+    = f.label :login_id
+    = f.text_field :login_id
+  p
+    = f.label :admin
+    = f.check_box :admin
+  p
+    = f.label :password
+    = f.text_field :password
+  p
+    = f.label :password_confirmation
+    = f.text_field :password_confirmation
+  p
+    = f.submit '登録'

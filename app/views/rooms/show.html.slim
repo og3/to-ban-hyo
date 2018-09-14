@@ -1,0 +1,36 @@
+.page-header.text-center
+  h2
+    | menu
+.adsence.text-center
+  br
+.container
+  .row
+    .col-xs-12.col-sm-12.col-md-6.col-lg-6.col-xs-offset-0.col-sm-offset-0.col-md-offset-3.col-lg-offset-3.toppad
+      .panel.panel-info
+        .panel-heading
+          h3.panel-title
+            = "info and menu"
+        .panel-body
+          .row
+            .col-md-9.col-lg-9
+              table.table.table-user-information
+                tbody
+                  tr
+                    td = "ユーザー"
+                    td = @current_room.name
+                  tr
+                    td = "掃除当番（#{@toban.start_of_period.strftime('%m/%d')}〜）"
+                    td = @toban.role.name
+              = link_to "「couri024」に投稿する", anonymousposts_path(send_to: "couri024"), class: 'btn btn-primary center-block'
+              .adsence
+                br
+              = link_to "「掃除当番G」に投稿する", anonymousposts_path(send_to: "soujig"), class: 'btn btn-primary center-block'
+              .adsence
+                br
+              = link_to "「テストグループ」に投稿する", anonymousposts_path(send_to: "test"), class: 'btn btn-primary center-block'
+              - if admin?
+                ul
+                  li = link_to "部屋一覧へ", rooms_path, class: 'btn btn-sm'
+                  li = link_to "当番表一覧へ", tobanhyos_path, class: 'btn btn-sm'
+        .panel-footer
+          = link_to "ログアウト", logout_path, :method => :delete, class: 'btn btn-sm btn-danger center-block'

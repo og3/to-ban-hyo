@@ -1,0 +1,18 @@
+.page-header.text-center
+  h2 = "send to line groups"
+.adsence.text-center
+  br
+.container
+  .row
+    .col-xs-12.col-sm-12.col-md-6.col-lg-6.col-xs-offset-0.col-sm-offset-0.col-md-offset-3.col-lg-offset-3.toppad
+      .panel.panel-info
+        .panel-heading
+          h3.panel-title
+            = "投稿先LINEグループ：#{@group_name}"
+        = form_tag anonymousposts_post_path, class: 'form-signin mb10', :method => :get
+          .panel-body
+            = text_area_tag :message, nil, rows: 15, class: 'form-control mb10', placeholder: "lineに投稿するメッセージを入力してください"
+            = hidden_field_tag :group, @group
+          .panel-footer
+            .row
+              = submit_tag "送信する", class: 'btn btn-sm btn-danger center-block', data: { confirm: "この内容で投稿しますか？\nなお、この操作は取り消せません！"}
