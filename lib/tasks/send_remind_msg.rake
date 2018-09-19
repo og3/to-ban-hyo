@@ -9,7 +9,7 @@ namespace :send_remind_msg do
                      when "Tue", "Fri" then ["燃えるゴミ", 2]
                      end
     toban = Tobanhyo.where(role_id: toban_id).order(:start_of_period).last
-    msg = "明日は #{duty} の日です！\nよろしくお願いします！\n\n#{toban.room.name}: #{toban.role.name}"
+    msg = "明日は #{duty} の日です！\nよろしくお願いします！\n\n#{toban.room.name}: #{toban.role.name}\n\n備考：#{toban.role.memo}"
     msg
   end
 
