@@ -1,19 +1,32 @@
-p = Time.zone.today.strftime('%Y/%m/%d')
-p = "更新は土曜の20:00~日曜の19:59に行なってください（暫定）"
+= render 'shared/header'
 = form_tag '/tobanhyos', method: :post do
-  - @tobanhyos[false].each do |tobanhyo|
-    = fields_for "tobans[]", tobanhyo do |fi|
-      p
-        = fi.select :room_id, @rooms, :selected => tobanhyo.room.id
-        = fi.select :role_id, @roles, :selected => tobanhyo.role.id
-        = fi.select :fixed, [true, false], :selected => false
-        = fi.date_field :start_of_period, value: Time.zone.today.strftime("%Y-%m-%d")
-  = "---------------------"
-  - @tobanhyos[true].each do |tobanhyo|
-    = fields_for "tobans[]", tobanhyo do |fi|
-        p
-          = fi.select :room_id, @rooms, :selected => tobanhyo.room.id
-          = fi.select :role_id, @roles, :selected => tobanhyo.role.id
-          = fi.select :fixed, [true, false], :selected => true
-          = fi.date_field :start_of_period, value: Time.zone.today.strftime("%Y-%m-%d")
-  = submit_tag
+  .container
+    .page-header
+      h1
+        | 当番表新規作成
+        = submit_tag "作成", class: 'btn btn-lg btn-success pull-right'
+    .container
+      p = "更新は土曜の20:00~日曜の19:59に行なってください（暫定）"
+      .panel.panel-default
+        table.table.table-striped.table-hover
+          thead
+            tr
+              th = "neme"
+              th = "role"
+              th = "fixed"
+              th = "start_of_period"
+            tbody
+              - @tobanhyos[false].each do |tobanhyo|
+                = fields_for "tobans[]", tobanhyo do |fi|
+                  tr
+                    td = fi.select :room_id, @rooms, :selected => tobanhyo.room.id
+                    td = fi.select :role_id, @roles, :selected => tobanhyo.role.id
+                    td = fi.select :fixed, [true, false], :selected => false
+                    td = fi.date_field :start_of_period, value: Time.zone.today.strftime("%Y-%m-%d")
+              - @tobanhyos[true].each do |tobanhyo|
+                = fields_for "tobans[]", tobanhyo do |fi|
+                  tr
+                    td = fi.select :room_id, @rooms, :selected => tobanhyo.room.id
+                    td = fi.select :role_id, @roles, :selected => tobanhyo.role.id
+                    td = fi.select :fixed, [true, false], :selected => true
+                    td = fi.date_field :start_of_period, value: Time.zone.today.strftime("%Y-%m-%d")

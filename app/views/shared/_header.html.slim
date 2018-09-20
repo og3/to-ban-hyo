@@ -1,0 +1,16 @@
+.navbar.navbar-inverse[role="navigation"]
+  .container
+    .navbar-header
+      button.navbar-toggle[type="button" data-toggle="collapse" data-target=".navbar-collapse"]
+        span.sr-only
+        span.icon-bar
+        span.icon-bar
+        span.icon-bar
+    .navbar-collapse.collapse
+      ul.nav.navbar-nav
+        li = link_to "部屋一覧", rooms_path
+        li = link_to "当番表一覧", tobanhyos_path
+        li = link_to "ユーザー画面へ", room_path(@current_room)
+
+      .nav.navbar-right
+        = link_to "ログアウト", logout_path, :method => :delete, class: 'btn btn-danger navbar-btn dropdown-toggle button-login'
