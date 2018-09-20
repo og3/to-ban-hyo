@@ -1,10 +1,20 @@
-= params[:start_of_period]
-- @tobanhyo[false].each do |tobanhyo|
-  p
-    = tobanhyo.room.name + " : "
-    = tobanhyo.role.name
-= "---------------------"
-- @tobanhyo[true].each do |tobanhyo|
-  p
-    = tobanhyo.room.name + " : "
-    = tobanhyo.role.name
+= render 'shared/header'
+.container
+  .page-header
+    h1 = params[:start_of_period]
+.container
+  .panel.panel-default
+    table.table.table-striped.table-hover
+      thead
+        tr
+          th = "name"
+          th = "role"
+      tbody
+        - @tobanhyo[false].each do |tobanhyo|
+          tr
+            td = tobanhyo.room.name
+            td = tobanhyo.role.name
+        - @tobanhyo[true].each do |tobanhyo|
+          tr
+            td = tobanhyo.room.name
+            td = tobanhyo.role.name

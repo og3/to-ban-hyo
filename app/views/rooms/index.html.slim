@@ -1,3 +1,14 @@
-p = "編集画面に飛びます"
-- @rooms.each do |room|
-  p  = link_to room.name, edit_room_path(room)
+= render 'shared/header'
+.container
+  .page-header
+    h1 = "部屋一覧"
+.container
+  .panel.panel-default
+    table.table.table-striped.table-hover
+      thead
+        tr
+          th = "名前"
+      tbody
+        - @rooms.each do |room|
+          tr
+            td = link_to room.name, edit_room_path(room)

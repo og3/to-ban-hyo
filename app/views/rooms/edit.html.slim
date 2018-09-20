@@ -1,18 +1,29 @@
-= form_for @room, url: room_path do |f|
-  p
-    = f.label :name
-    = f.text_field :name
-  p
-    = f.label :login_id
-    = f.text_field :login_id
-  p
-    = f.label :admin
-    = f.check_box :admin
-  p
-    = f.label :password
-    = f.text_field :password
-  p
-    = f.label :password_confirmation
-    = f.text_field :password_confirmation
-  p
-    = f.submit '登録'
+= render 'shared/header'
+.container
+  .panel.panel-default
+    table.table.table-striped.table-hover
+      tbody
+        = form_for @room, url: room_path do |f|
+          tr
+            td
+              = f.label :name
+              = f.text_field :name
+          tr
+            td
+              = f.label :login_id
+              = f.text_field :login_id
+          tr
+            td
+              = f.label :admin
+              = f.check_box :admin
+          tr
+            td
+              = f.label :password
+              = f.text_field :password
+          tr
+            td
+              = f.label :password_confirmation
+              = f.text_field :password_confirmation
+          tr
+            td
+              = f.submit '登録'
