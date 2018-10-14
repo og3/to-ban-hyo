@@ -3,6 +3,7 @@ class Room < ApplicationRecord
   has_secure_password validations: true
 
   validates :login_id, presence: true, uniqueness: true
+  validates :password, confirmation: true
 
   def self.new_remember_token
     SecureRandom.urlsafe_base64

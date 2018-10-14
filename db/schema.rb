@@ -21,12 +21,12 @@ ActiveRecord::Schema.define(version: 20180919033059) do
 
   create_table "rooms", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|
     t.string   "name"
-    t.datetime "created_at",      null: false
-    t.datetime "updated_at",      null: false
-    t.string   "login_id",        null: false
-    t.string   "password_digest", null: false
-    t.string   "remember_token",  null: false
-    t.boolean  "admin",           null: false
+    t.datetime "created_at",                   null: false
+    t.datetime "updated_at",                   null: false
+    t.string   "login_id",                     null: false
+    t.string   "password_digest",              null: false
+    t.string   "remember_token",  default: "", null: false
+    t.boolean  "admin",                        null: false
   end
 
   create_table "tobanhyos", force: :cascade, options: "ENGINE=InnoDB DEFAULT CHARSET=utf8" do |t|

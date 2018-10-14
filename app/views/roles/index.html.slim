@@ -1,0 +1,24 @@
+= render 'shared/header'
+.container
+  .page-header
+    h1
+      | 役割一覧
+      = link_to "新規作成", new_role_path, class: 'btn btn-lg btn-success pull-right'
+.container
+  .panel.panel-default
+    table.table.table-striped.table-hover
+      thead
+        tr
+          th = "名前"
+          th = "メモ"
+          th = "操作"
+      tbody
+        - @roles.each do |role|
+          tr
+            td = role.name
+            td = role.memo
+            td
+              = link_to "編集", edit_role_path(role), class: 'btn btn-primary'
+              / fixme paddingでなんとかしたい
+              = " | "
+              = link_to "削除", role_path(role), method: :delete, data: { confirm: '本当に削除しますか？' }, class: 'btn btn-danger'

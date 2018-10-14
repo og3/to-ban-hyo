@@ -5,8 +5,9 @@ Rails.application.routes.draw do
   get 'tobanhyos/show/:start_of_period' => 'tobanhyos#show'
   get 'tobanhyos/new/:start_of_period' => 'tobanhyos#new'
   post 'tobanhyos' => 'tobanhyos#create'
-  # room関連
-  resources :rooms, :only => [:edit, :update, :index, :show]
+  # 部屋・役割関連
+  resources :rooms, :only => [:new, :create, :edit, :update, :index, :show, :destroy]
+  resources :roles, :only => [:new, :create, :edit, :update, :index, :show, :destroy]
   # ログイン関連
   get     'login',   to: 'sessions#new'
   post    'login',   to: 'sessions#create'

@@ -1,0 +1,19 @@
+= render 'shared/header'
+- @role.errors.full_messages.each do |message|
+ = message
+.container
+  .panel.panel-default
+    = form_for @role, url: role_path do |f|
+      table.table.table-striped.table-hover
+        tbody
+          tr
+            td
+              = f.label :name
+              = f.text_field :name
+          tr
+            td
+              = f.label :memo
+              = f.text_area :memo
+          tr
+            td
+              = f.submit '登録'
